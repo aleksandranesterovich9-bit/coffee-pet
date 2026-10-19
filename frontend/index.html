@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Кварта — обжарка кофе в Минске</title>
+  <meta name="description" content="«Кварта» — небольшая независимая обжарка кофе в Минске. Обжариваем в четверг, привозим в пятницу. Кофе, дрип-пакеты и подписка.">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="logo" href="#top" aria-label="Кварта, в начало страницы">Кварта</a>
+
+      <nav class="site-nav" aria-label="Основная навигация">
+        <ul class="site-nav__list">
+          <li><a href="#about">О нас</a></li>
+          <li><a href="#freshness">Свежесть</a></li>
+          <li><a href="#catalog">Каталог</a></li>
+          <li><a href="#subscription">Подписка</a></li>
+          <li><a href="#delivery">Доставка</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <a class="button button--small site-header__cta" href="#request">Оставить заявку</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- Первый экран -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <div class="hero__text">
+          <h1 id="hero-title">Обжариваем в четверг, привозим в пятницу</h1>
+          <p class="hero__lead">
+            «Кварта» — небольшая независимая обжарка в Минске. Кофе обжаривается
+            небольшими партиями и приезжает к вам через 1–3 дня после обжарки.
+          </p>
+          <div class="hero__actions">
+            <a class="button" href="#catalog">Выбрать кофе</a>
+            <a class="button button--cherry" href="#subscription">Оформить подписку</a>
+          </div>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <div class="label">
+            <span class="label__hole"></span>
+            <p class="label__brand">Кварта</p>
+            <p class="label__line">Обжарка небольшими партиями</p>
+            <dl class="label__meta">
+              <div><dt>Обжарено</dt><dd>в четверг</dd></div>
+              <div><dt>Доставка по Минску</dt><dd>в пятницу</dd></div>
+              <div><dt>Пакет</dt><dd>250 г</dd></div>
+            </dl>
+            <svg class="stamp" viewBox="0 0 160 160" focusable="false">
+              <defs>
+                <path id="stamp-path" d="M80,80 m-56,0 a56,56 0 1,1 112,0 a56,56 0 1,1 -112,0"/>
+              </defs>
+              <circle class="stamp__ring" cx="80" cy="80" r="74" pathLength="1" fill="none" stroke="currentColor" stroke-width="2"/>
+              <text font-size="13" fill="currentColor" letter-spacing="1.2">
+                <textPath href="#stamp-path" textLength="345" lengthAdjust="spacing">небольшие партии, свежая обжарка,</textPath>
+              </text>
+              <text x="80" y="92" text-anchor="middle" font-size="34" font-weight="700" fill="currentColor" font-family="Georgia, serif">Чт</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- О бренде -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container about">
+        <h2 class="about__title reveal" id="about-title">Небольшие партии и внимание к каждому сорту</h2>
+
+        <div class="about__text reveal">
+          <p>
+            «Кварта» — небольшая независимая обжарка кофе в Минске. Мы обжариваем кофе
+            небольшими партиями и внимательно относимся к каждому сорту.
+          </p>
+                  <p>
+          Мы — Аня и Дмитрий. До открытия своей мастерской мы работали
+          бариста и хорошо знаем, как сильно свежесть обжарки влияет
+          на вкус кофе. В 2019 году начали обжаривать кофе самостоятельно
+          и с тех пор работаем небольшими партиями по 5 кг.
+        </p>
+        </div>
+
+        <figure class="about__photo reveal">
+          <div class="photo-slot" role="img" aria-label="Иллюстрация обжарки кофе"><span class="photo-slot__label">КВАРТА · ОБЖАРКА 5 КГ</span></div>
+          <figcaption>Обжариваем кофе небольшими партиями по 5 кг и следим за каждой обжаркой.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Свежесть -->
+    <section class="section section--cherry" id="freshness" aria-labelledby="freshness-title">
+      <div class="container freshness">
+        <h2 class="reveal" id="freshness-title">Свежесть кофе</h2>
+
+        <div class="freshness__body reveal">
+          <ol class="week" aria-hidden="true">
+            <li><span>Пн</span></li>
+            <li><span>Вт</span></li>
+            <li><span>Ср</span></li>
+            <li class="week__roast"><span>Чт</span></li>
+            <li class="week__send"><span>Пт</span><small>+1</small></li>
+            <li class="week__after"><span>Сб</span><small>+2</small></li>
+            <li class="week__after"><span>Вс</span><small>+3</small></li>
+          </ol>
+
+          <ul class="legend">
+            <li class="legend__item legend__item--roast"><strong>Четверг</strong> — обжарка</li>
+            <li class="legend__item legend__item--send"><strong>Пятница</strong> — доставка по Минску</li>
+            <li class="legend__item legend__item--after">Кофе у вас через 1–3 дня после обжарки. Цифры на схеме показывают дни после четверга.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Каталог -->
+    <section class="section section--paper" id="catalog" aria-labelledby="catalog-title">
+      <div class="container">
+        <h2 class="reveal" id="catalog-title">Каталог</h2>
+        <p class="section__intro reveal">Кофе продаётся пакетами по 250 г.</p>
+
+        <div class="catalog">
+          <article class="coffee coffee--et reveal">
+            <div class="coffee__mark" aria-hidden="true"><span>ET</span></div>
+            <div class="coffee__body">
+              <h3>Ethiopia Yirgacheffe</h3>
+              <p class="coffee__notes">Цветочные ноты и бергамот</p>
+              <ul class="coffee__facts">
+                <li>Светлая обжарка</li>
+                <li>250 г</li>
+              </ul>
+            </div>
+            <div class="coffee__buy">
+              <p class="price"><data value="32">32 BYN</data></p>
+              <a class="button" href="#request" data-request-type="coffee" data-product="Ethiopia Yirgacheffe">Заказать</a>
+            </div>
+          </article>
+
+          <article class="coffee coffee--co reveal">
+            <div class="coffee__mark" aria-hidden="true"><span>CO</span></div>
+            <div class="coffee__body">
+              <h3>Colombia Huila</h3>
+              <p class="coffee__notes">Карамель и красное яблоко</p>
+              <ul class="coffee__facts">
+                <li>250 г</li>
+              </ul>
+            </div>
+            <div class="coffee__buy">
+              <p class="price"><data value="29">29 BYN</data></p>
+              <a class="button" href="#request" data-request-type="coffee" data-product="Colombia Huila">Заказать</a>
+            </div>
+          </article>
+
+          <article class="coffee coffee--br reveal">
+            <div class="coffee__mark" aria-hidden="true"><span>BR</span></div>
+            <div class="coffee__body">
+              <h3>Brazil Cerrado</h3>
+              <p class="coffee__notes">Орех и шоколад</p>
+              <ul class="coffee__facts">
+                <li>Для эспрессо</li>
+                <li>250 г</li>
+              </ul>
+            </div>
+            <div class="coffee__buy">
+              <p class="price"><data value="26">26 BYN</data></p>
+              <a class="button" href="#request" data-request-type="coffee" data-product="Brazil Cerrado">Заказать</a>
+            </div>
+          </article>
+
+          <article class="coffee coffee--drip reveal">
+            <div class="coffee__mark" aria-hidden="true"><span>10</span></div>
+            <div class="coffee__body">
+              <h3>Дрип-пакеты</h3>
+              <p class="coffee__notes">Набор для заваривания в чашке</p>
+              <ul class="coffee__facts">
+                <li>10 штук</li>
+              </ul>
+            </div>
+            <div class="coffee__buy">
+              <p class="price"><data value="18">18 BYN</data></p>
+              <a class="button" href="#request" data-request-type="drip" data-product="Дрип-пакеты (10 штук)">Заказать</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Подписка -->
+    <section class="section section--ink" id="subscription" aria-labelledby="subscription-title">
+      <div class="container subscription">
+        <div class="subscription__lead reveal">
+          <h2 id="subscription-title">Подписка</h2>
+          <p class="subscription__sentence">Два пакета по 250 г в месяц. Доставка бесплатная.</p>
+          <p>Каждый месяц — два пакета по 250 г. Выбирайте любимые сорта из каталога или попросите нас подобрать кофе под ваш вкус. Подписка стоит 54 BYN, доставка включена.</p>
+        </div>
+
+        <div class="subscription__offer reveal">
+          <p class="subscription__price"><data value="54">54 BYN</data> <span>в месяц</span></p>
+          <a class="button button--cherry" href="#request" data-request-type="subscription">Оформить подписку</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Доставка и самовывоз -->
+    <section class="section" id="delivery" aria-labelledby="delivery-title">
+      <div class="container">
+        <h2 class="reveal" id="delivery-title">Доставка и самовывоз</h2>
+
+        <div class="facts">
+          <div class="fact reveal">
+            <h3>Доставка по Минску</h3>
+            <p class="fact__main">По пятницам</p>
+          </div>
+          <div class="fact reveal">
+            <h3>Бесплатная доставка</h3>
+            <p class="fact__main">При заказе от 50 BYN</p>
+            <p>Для заказов до 50 BYN стоимость доставки — 5 BYN.</p>
+          </div>
+          <div class="fact reveal">
+            <h3>Самовывоз</h3>
+            <p class="fact__main">Минск, ул. Короля, 9</p>
+            <p>Пн–Пт: 08:00–20:00, Сб–Вс: 10:00–18:00.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="section section--paper" id="contacts" aria-labelledby="contacts-title">
+      <div class="container">
+        <h2 class="reveal" id="contacts-title">Контакты</h2>
+
+        <dl class="contacts reveal">
+          <div class="contacts__row">
+            <dt>Адрес</dt>
+            <dd>Минск, ул. Короля, 9</dd>
+          </div>
+          <div class="contacts__row">
+            <dt>Телефон</dt>
+            <dd><a href="tel:+375295551234">+375 (29) 555-12-34</a></dd>
+          </div>
+          <div class="contacts__row">
+            <dt>Почта</dt>
+            <dd><a href="mailto:hello@kvarta.example">hello@kvarta.example</a></dd>
+          </div>
+          <div class="contacts__row">
+            <dt>Часы работы</dt>
+            <dd>Пн–Пт: 08:00–20:00, Сб–Вс: 10:00–18:00</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Форма заявки -->
+    <section class="section section--ink" id="request" aria-labelledby="request-title">
+      <div class="container request">
+        <div class="request__intro reveal">
+          <h2 id="request-title">Оставить заявку</h2>
+          <p>Расскажите, что вас интересует: заказ кофе, дрип-пакеты, подписка или другой вопрос.</p>
+          <p class="request__dev-note">
+            Оставьте заявку — мы свяжемся с вами, чтобы уточнить детали заказа.
+          </p>
+        </div>
+
+        <form class="form reveal" id="request-form" action="#" method="post">
+          <div class="field">
+            <label for="field-name">Имя</label>
+            <input id="field-name" name="name" type="text" autocomplete="given-name" required>
+          </div>
+
+          <div class="field">
+            <label for="field-phone">Телефон</label>
+            <input id="field-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required>
+          </div>
+
+          <div class="field">
+            <label for="field-type">Тип обращения</label>
+            <select id="field-type" name="type" required>
+              <option value="" selected disabled>Выберите из списка</option>
+              <option value="coffee">Заказ кофе</option>
+              <option value="drip">Дрип-пакеты</option>
+              <option value="subscription">Подписка</option>
+              <option value="other">Другой вопрос</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="field-comment">Комментарий</label>
+            <textarea id="field-comment" name="comment" rows="5"></textarea>
+          </div>
+
+          <button class="button button--light" type="submit">Отправить заявку</button>
+
+          <p class="form__status" id="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p>«Кварта», обжарка кофе, Минск</p>
+      <a href="#top">Наверх</a>
+    </div>
+  </footer>
+
+</body>
+</html>
