@@ -16,6 +16,6 @@ class LeadRequest(BaseModel):
     @classmethod
     def validate_phone(cls, value: str) -> str:
         if not re.fullmatch(r"\+375\d{9}", value):
-            raise ValueError("Неккоректный номер(doesn't from Belarus. PS: +375XXXXXXXXX)")
+            raise ValueError("Неккоректный номер. Номер должен быть белорусским: +375XXXXXXXXX")
         return value
 

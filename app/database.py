@@ -1,18 +1,36 @@
-import sqlite3
+import asyncpg
+import os
+from dotenv import load_dotenv
+
 from datetime import datetime, timedelta, timezone
-from pathlib import Path
+
+load_dotenv()
 
 
-# Путь к файлу базы данных kvarta.db в корне проекта
-DB_PATH = Path(__file__).resolve().parent.parent / "kvarta.db"
+async def create_pool() -> asyncpg.Pool:
+    from urllib.parse import urlparse, unquote
+
+    database_url = os.getenv("DATABASE_URL")
+    if not database_url:
+        raise RuntimeError("DATABASE_URL не найдена в .env")
+
+    parsed = urlparse(database_url)
+
+    return await asyncpg.create_pool(
+        user=unquote(parsed.username or ""),
+        password=unquote(parsed.password or ""),
+        database=parsed.path.lstrip("/"),
+        host=parsed.hostname or "127.0.0.1",
+        port=parsed.port or 5432,
+    )
 
 
-def init_db():
+async def init_db(pool: asyncpg.Pool) -> None:
     """Создаёт таблицу заявок, если её ещё нет."""
-    with sqlite3.connect(DB_PATH) as connection:
-        connection.execute("""
+    async with pool.acquire() as connection:
+        await connection.execute("""
             CREATE TABLE IF NOT EXISTS leads (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id BIGSERIAL PRIMARY KEY,
                 name TEXT NOT NULL,
                 phone TEXT NOT NULL,
                 interest TEXT NOT NULL,
@@ -21,85 +39,63 @@ def init_db():
                 utm_campaign TEXT,
                 utm_content TEXT,
                 landing_page TEXT,
-                created_at TEXT NOT NULL
+                created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
             )
         """)
 
 
-def save_lead(data: dict) -> int | None:
+async def save_lead(pool: asyncpg.Pool, data: dict) -> int | None:
     """
-    Сохраняет заявку в базу данных.
+    Сохраняет заявку.
 
-    Возвращает ID заявки при успехе.
-    Возвращает None, если с этого номера
-    уже поступала заявка за последние 10 минут.
+    Возвращает ID при успехе или None,
+    если номер уже использовался за последние 10 минут.
     """
-    phone = data["phone"]
-
-    now = datetime.now(timezone.utc)
-    cutoff = (now - timedelta(minutes=10)).isoformat()
-    created_at = now.isoformat()
-
-    connection = sqlite3.connect(DB_PATH, timeout=10)
-
-    try:
-        # Блокируем начало записи, чтобы уменьшить риск
-        # создания двух заявок при двойном нажатии.
-        connection.execute("BEGIN IMMEDIATE")
-
-        duplicate = connection.execute(
-            """
-            SELECT id
-            FROM leads
-            WHERE phone = ?
-              AND created_at >= ?
-            LIMIT 1
-            """,
-            (phone, cutoff),
-        ).fetchone()
-
-        if duplicate:
-            connection.rollback()
-            return None
-
-        cursor = connection.execute(
-            """
-            INSERT INTO leads (
-                name,
-                phone,
-                interest,
-                comment,
-                utm_source,
-                utm_campaign,
-                utm_content,
-                landing_page,
-                created_at
+    async with pool.acquire() as connection:
+        async with connection.transaction():
+            # Сериализуем обработку заявок с одним номером.
+            await connection.execute(
+                """
+                SELECT pg_advisory_xact_lock(
+                    hashtextextended($1, 0)
+                )
+                """,
+                data["phone"],
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """,
-            (
+
+            duplicate = await connection.fetchval(
+                """
+                SELECT id
+                FROM leads
+                WHERE phone = $1
+                  AND created_at >= $2
+                LIMIT 1
+                """,
+                data["phone"],
+                datetime.now(timezone.utc) - timedelta(minutes=10),
+            )
+
+            if duplicate is not None:
+                return None
+
+            lead_id = await connection.fetchval(
+                """
+                INSERT INTO leads (
+                    name, phone, interest, comment,
+                    utm_source, utm_campaign, utm_content,
+                    landing_page
+                )
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                RETURNING id
+                """,
                 data["name"],
-                phone,
+                data["phone"],
                 data["interest"],
                 data.get("comment"),
                 data.get("utm_source"),
                 data.get("utm_campaign"),
                 data.get("utm_content"),
                 data.get("landing_page"),
-                created_at,
-            ),
-        )
+            )
 
-        lead_id = cursor.lastrowid
-        connection.commit()
-
-        return lead_id
-
-    except Exception:
-        connection.rollback()
-        raise
-
-    finally:
-        connection.close()
-
-init_db()
+            return lead_id
